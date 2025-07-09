@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>To-Do List</title>
+	<style>
+		.container
+		{
+		width:300px;
+		margin:50px auto;
+		border: 4px solid;
+		border-radius: 9px;
+		padding: 10px;
+		background-color: #d6cc99;
+		color: #5e3023;
+		}
+		h1{
+		margin-bottom: 3px;
+		}
+		input{
+		margin-top: 1px;
+		height: 30px;
+		}
+		button{
+		margin-left: 5px;
+		margin-right: 3px;
+		width: 100px;
+		height: 30px;
+		background-color: #445d48;
+		border-radius: 3px;
+		
+		}
+		button:hover
+		{
+		font-weight: bolder;
+		}
+		.todoList {
+            
+            padding: 0;
+        }
+		li{
+			
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+			padding-bottom: 3px;
+		}
+		#taskInput{
+			background-color: #eae6d5;
+			border-radius: 5px;
+			border-width: 3px;
+			border-color: #5e3023;
+		}
+	</style>
+	<script>
+		function addTask()
+		{
+			const input=document.getElementById("taskInput");
+			const taskText=input.value.trim();
+			if(taskText!==""){
+			const ul=document.getElementById("TaskList");
+			const li=document.createElement("li");
+			const span=document.createElement("span");
+			span.textContent=taskText;
+			const edit=document.createElement("button");
+			edit.textContent="Edit";
+			edit.onclick=()=>editTask(span);
+			const remove=document.createElement("button");
+			remove.textContent="Remove";
+			remove.onclick=()=>removeTask(li);
+			li.appendChild(span);
+			li.appendChild(edit);
+			li.appendChild(remove);
+			ul.appendChild(li);
+			input.value="";
+			}
+			else{
+                alert("Please enter a valid task");
+            }
+		}
+		function editTask(span)
+		{
+			const newTask=prompt("Edit your task:", span.textContent);
+			if(newTask!==null && newTask!=="")
+			{
+					span.textContent=newTask;
+			}
+		}
+		function removeTask(task)
+		{
+				const ul=document.getElementById("TaskList");
+				ul.removeChild(task);
+		}
+	</script>
+</head>
+<body>
+	<div class="container">
+	<h1><u>To-Do List</u></h1><br/>
+	<input type="text" placeholder="Add new Task" id="taskInput">
+	<button class="add-bttn" onclick="addTask()" id="addTaskBtn">Add Task</button>
+	<ul id="TaskList" class="todoList"></ul>
+	</div>
+</body>
+</html>
